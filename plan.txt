@@ -1,0 +1,13 @@
+Welcome! Option to (p)lay, read (i)nstructions, or (q)uit?
+Talk about rules
+Show message (included in setup)
+Display (Fresh) Board
+Present choices to player: queu message
+Player picks choice
+Remove choice from available choices
+Display board
+Repeat this step until player has winning combo
+
+
+Game over. Show winner. Press (p)lay again or (q)uit.
+Messages will separate everything.
