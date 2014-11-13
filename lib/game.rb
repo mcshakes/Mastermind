@@ -32,7 +32,7 @@ class Game
   end
 
   def play
-    p "Secret code: #{codemaker.code}"
+  #  p "Secret code: #{codemaker.code}"
     puts messages.game_flow_blurb
     puts messages.prompt_for_answer
     until win?
@@ -41,22 +41,27 @@ class Game
       quit if user_input == 'q'
 
       @evaluator = Evaluator.new(user_input.chars, codemaker.code)
+      correct_colors
+      correct_positions
+      check_length
+    end
+  end
 
-      colors    = @evaluator.correct_colors
-      positions = @evaluator.correct_positions
-      unless colors > 1
-        puts "You have #{colors} color that's correct."
-      else
-        puts "#{colors} colors are correct"
-      end
+  def correct_colors
+    colors    = @evaluator.correct_colors
+    unless colors > 1
+      puts "You have #{colors} color that's correct."
+    else
+      puts "#{colors} colors are correct"
+    end
+  end
 
-      unless positions > 1
-        puts "You have #{positions} correct position."
-      else
-        puts "#{positions} positions are correct."
-      end
-
-     check_length
+  def correct_positions
+    positions = @evaluator.correct_positions
+    unless positions > 1
+      puts "You have #{positions} correct position."
+    else
+      puts "#{positions} positions are correct."
     end
   end
 
@@ -97,7 +102,6 @@ class Game
     puts "Do you want to (p)lay again or (q)uit like always?"
     print "<$>"
   end
-
 end
 
 # g = Game.new.play

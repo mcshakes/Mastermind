@@ -11,15 +11,15 @@ class GameTest < Minitest::Test
   end
 
   def test_instructions_are_displayed
+    skip
     game = Game.new
     assert_equal "\nPick amongst four colors: \n(r)ed \n(g)reen \n(b)lue and \n(y)ellow.
     Only those four. Complicated right?
     You can (q)uit any time, quitter. Nobody judges you."
-    
+
   end
 
   def test_a_game_can_generate_a_code
-    skip
     code = %w(r g b y)
     game = Game.new
     code = Codemaker.new
