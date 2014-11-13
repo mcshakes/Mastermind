@@ -1,6 +1,9 @@
+require 'colorize'  # => true
+
 class Messages
 
   def welcome_message
+    clear_screen
    "\nWelcome to MASTERMIND!\nWould you like to (p)lay, read the (i)nstructions, or (q)uit? <$>"
   end
 
@@ -11,12 +14,12 @@ class Messages
   end
 
   def game_flow_blurb
-    "I have generated a beginner sequence with four elements made up of:
-    (r)ed,(g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game."
+    "I have generated a sequence with four elements made up of:
+    (r)ed,(g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.".magenta
   end
 
   def prompt_for_answer
-    "\nWhat's your guess? \n<$>"   #has to appear after every wrong guess
+    "\nGive me your guess! \n<$>"   #has to appear after every wrong guess
   end
 
   def abrupt_end
@@ -29,15 +32,15 @@ class Messages
   end
 
   def not_enough_guesses
-    "\nToo short. Pound that keyboard and add some guesses"
+    "\nToo short. Pound that keyboard and add some guesses".red
   end
 
   def too_many_guesses
-    "\nToo long bro. Stop jamming random keys."
+    "\nToo long bro. Stop jamming random keys.".red
   end
 
   def invalid_commands
-    "Those are your only choices bro"
+    "Those are your only choices genius"
     "Nope! Don't recognize that command"
     "Your choices are (p)lay, read complicated (i)nstructions, or (q)uit."
     "Pick one please."
@@ -46,6 +49,10 @@ class Messages
 
   def end_game_sequence
     "Congrats! You guessed the secret code: . "
+  end
+
+  def clear_screen
+    print "\e[2J\e[f"
   end
 
 

@@ -10,41 +10,27 @@ class GameTest < Minitest::Test
     assert game
   end
 
-  def test_instructions_are_displayed
-    skip
+  def test_new_game_has_no_guesses
     game = Game.new
-    assert_equal "\nPick amongst four colors: \n(r)ed \n(g)reen \n(b)lue and \n(y)ellow.
-    Only those four. Complicated right?
-    You can (q)uit any time, quitter. Nobody judges you."
-
+    assert_equal 0, game.user_input.to_s.length
   end
 
   def test_a_game_can_generate_a_code
     code = %w(r g b y)
-    game = Game.new
-    code = Codemaker.new
     assert_equal 4, code.length
   end
 
-  def test_user_inputs_in_arrays
-
-  end
+  #require "pry"; binding.pry
 
   def test_user_gets_feedback_if_wins
-
+    game = Game.new
+    game.win?
+    assert game.end_game_sequence
   end
 
-  def test_user_gets_feedback_if_loses
-
+  def test_timer_is_displayed_always
+    game = Game.new
+    assert game.timer
   end
-
-  def test_time_is_displayed_always
-
-  end
-
-
-
-
-
 
 end

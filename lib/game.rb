@@ -1,17 +1,18 @@
-require_relative 'codemaker'  # => true
-require_relative 'evaluator'  # => true
-require_relative 'messages'   # => true
+require_relative 'codemaker'
+require_relative 'evaluator'
+require_relative 'messages'
+require 'colorize'
 
 
 class Game
-  attr_reader :messages, :codemaker, :user_input  # => nil
+  attr_reader :messages, :codemaker, :user_input, :start_time
 
   def initialize
     @codemaker = Codemaker.new
     @start_time = ''
     @end_time = ''
     @messages = Messages.new
-    @time = Time.new
+    @start_time = Time.new
   end
 
   def display_instructions
@@ -32,19 +33,19 @@ class Game
   end
 
   def play
-  #  p "Secret code: #{codemaker.code}"
+    p "Secret code: #{codemaker.code}"
     puts messages.game_flow_blurb
     puts messages.prompt_for_answer
     until win?
       @user_input = gets.chomp.downcase
-
       quit if user_input == 'q'
-
       @evaluator = Evaluator.new(user_input.chars, codemaker.code)
       correct_colors
       correct_positions
       check_length
     end
+    puts end_game_sequence
+    puts prompt_at_end
   end
 
   def correct_colors
@@ -59,33 +60,44 @@ class Game
   def correct_positions
     positions = @evaluator.correct_positions
     unless positions > 1
-      puts "You have #{positions} correct position."
+      puts "You have #{positions} correct position.".yellow
     else
-      puts "#{positions} positions are correct."
+      puts "#{positions} positions are correct.".yellow
     end
-  end
-
-  def arbiter_of_turns
-    check_length
-    check_proper_colors
   end
 
   def check_proper_colors
     unless colors > 1
-      puts "You have #{colors} color that's correct."
+      puts "You have #{colors} color that's correct.".yellow
     else
-      puts "#{colors} colors are correct"
+      puts "#{colors} colors are correct".yellow
     end
 
     unless positions > 1
-      puts "You have #{positions} correct position."
+      puts "You have #{positions} correct position.".yellow
     else
-      puts "#{positions} positions are correct."
+      puts "#{positions} positions are correct.".yellow
     end
   end
 
   def win?
-    user_input == codemaker.code
+    user_input == codemaker.code.join
+  end
+
+  def end_time
+    Time.now
+  end
+
+  def minutes
+    timer / 60
+  end
+
+  def seconds
+    timer % 60
+  end
+
+  def timer
+    (end_time - @start_time).to_i
   end
 
   def loser_message
@@ -94,12 +106,11 @@ class Game
   end
 
   def end_game_sequence
-    "\nCongrats! You guessed the secret code: #{@codemaker.code} in"
-    #{}"#{total_time} seconds."
+    "\nCongrats! You guessed the secret code: #{@codemaker.code} at #{minutes} minutes and #{seconds} seconds."
   end
 
   def prompt_at_end
-    puts "Do you want to (p)lay again or (q)uit like always?"
+    puts "\nDo you want to (p)lay again, read those (i)nstructions again, \nor (q)uit like always?"
     print "<$>"
   end
 end
