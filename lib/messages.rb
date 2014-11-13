@@ -4,7 +4,15 @@ class Messages
 
   def welcome_message
     clear_screen
-   "\nWelcome to MASTERMIND!\nWould you like to (p)lay, read the (i)nstructions, or (q)uit? <$>"
+    puts '
+  ___  ___             _                           _             _
+  |  \/  |            | |                         (_)           | |
+  | .  . |  __ _  ___ | |_   ___  _ __  _ __ ___   _  _ __    __| |
+  | |\/| | / _` |/ __|| __| / _ \| "__|| "_ ` _ \ | || "_ \  / _` |
+  | |  | || (_| |\__ \| |_ |  __/| |   | | | | | || || | | || (_| |
+  \_|  |_/ \__,_||___/ \__| \___||_|   |_| |_| |_||_||_| |_| \__,_|'
+
+   "\n\nWelcome to MASTERMIND!\nWould you like to (p)lay, read the (i)nstructions, or (q)uit? <$>"
   end
 
   def game_instructions
