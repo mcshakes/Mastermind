@@ -22,6 +22,7 @@ class Evaluator
 
   def correct_positions
     counter = 0
+
     guess.zip(code).select do |guess_value, code_value|
       if guess_value == code_value
         counter += 1

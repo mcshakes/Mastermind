@@ -2,17 +2,17 @@ require_relative 'codemaker'
 require_relative 'evaluator'
 require_relative 'messages'
 require 'colorize'
+require_relative 'timer'
 
 
 class Game
-  attr_reader :messages, :codemaker, :user_input, :start_time
+  attr_reader :messages, :codemaker, :user_input, :start_time, :timer
 
   def initialize
     @codemaker = Codemaker.new
-    @start_time = ''
-    @end_time = ''
     @messages = Messages.new
     @start_time = Time.new
+    @timer = Timer.new
   end
 
   def display_instructions
@@ -83,22 +83,22 @@ class Game
   def win?
     user_input == codemaker.code.join
   end
-
-  def end_time
-    Time.now
-  end
-
-  def minutes
-    timer / 60
-  end
-
-  def seconds
-    timer % 60
-  end
-
-  def timer
-    (end_time - @start_time).to_i
-  end
+  #
+  # def end_time
+  #   Time.now
+  # end
+  #
+  # def minutes
+  #   timer / 60
+  # end
+  #
+  # def seconds
+  #   timer % 60
+  # end
+  #
+  # def timer
+  #   (end_time - @start_time).to_i
+  # end
 
   def loser_message
     puts "\nOut of guesses! You lose! (p)lay again or (q)uit?"
@@ -106,7 +106,7 @@ class Game
   end
 
   def end_game_sequence
-    "\nCongrats! You guessed the secret code: #{@codemaker.code} at #{minutes} minutes and #{seconds} seconds."
+    "\nCongrats! You guessed the secret code: #{@codemaker.code} at #{@timer.minutes} minutes and #{@timer.seconds} seconds."
   end
 
   def prompt_at_end

@@ -28,9 +28,9 @@ class GameTest < Minitest::Test
     assert game.end_game_sequence
   end
 
-  def test_timer_is_displayed_always
+  def test_time_is_displayed_always
     game = Game.new
-    assert game.timer
+    assert game.timer.minutes
   end
 
 end
